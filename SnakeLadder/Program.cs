@@ -5,7 +5,6 @@ namespace SnakeLadder
     class Program
     {
         static int noPlay = 0;
-        static int currentPosition = 0;
         static int startPosition = 0;
         public static int rollDiceNumber()
         {
@@ -31,27 +30,25 @@ namespace SnakeLadder
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Snake and Ladder Game");
-            int numberDice = rollDiceNumber();
-            Random random = new Random();
-            int option = random.Next(1, 4);
-            // Use Switch case for option
-            switch (option)
+           int currentPosition = 0;
+            while (currentPosition != 100)
             {
-                case 1:
-                    currentPosition = noPlay;
-                    Console.WriteLine("Noplay");
-                    break;
-                case 2:
-                    Console.WriteLine("Got ladder");
-                    currentPosition = currentPosition + playLadder();
-                    break;
-                case 3:
-                    Console.WriteLine("Snake attack");
-                    currentPosition = currentPosition - snackAttack();
-                    break;
-                default:
-                    Console.WriteLine("Something Went Wrong");
-                    break;
+                int numberDice = rollDiceNumber();
+                Random random = new Random();
+                int option = random.Next(1, 3);
+                // Use Switch case for option
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("Got ladder");
+                        currentPosition = currentPosition + playLadder();
+                        break;
+                    case 2:
+                        Console.WriteLine("Snake attack");
+                        currentPosition = currentPosition - snackAttack();
+                        break;
+                   
+                }
             }
         }
     }
