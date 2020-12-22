@@ -23,6 +23,7 @@ namespace SnakeLadder
         {
             Console.WriteLine("Welcome to Snake and Ladder");
             int playerPosition = 0;
+            int numberOfRollsdice = 0;
             int winPosition = 100;
             //repeat till win position i.e. till 100
 
@@ -30,6 +31,7 @@ namespace SnakeLadder
             {
                 int playerDice = rollDice();
                 int option = checkOption();
+                numberOfRollsdice++;
 
                 switch (option)
                 {
@@ -64,7 +66,8 @@ namespace SnakeLadder
             }
             if (playerPosition == winPosition)
             {
-                Console.WriteLine("Player got {0} position and is the winner", playerPosition);
+                Console.WriteLine("Player got {0} position and is the winner ", playerPosition);
+                Console.WriteLine("The Number of roll dice are {0}  ", numberOfRollsdice);
             }
         }
     }
