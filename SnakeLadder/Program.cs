@@ -4,52 +4,69 @@ namespace SnakeLadder
 {
     class Program
     {
-        static int noPlay = 0;
-        static int startPosition = 0;
-        public static int rollDiceNumber()
+        // Function to roll a dice
+        public static int rollDice()
         {
             Random random = new Random();
-            int diceNumber = random.Next(0, 7);
-            return diceNumber;
+            int dicevalue = random.Next(1, 7);
+            return dicevalue;
         }
 
-        public static int playLadder()
+        //Function to check Player get a Ladder or snake or player play or not
+        public static int checkOption()
         {
             Random random = new Random();
-            int ladderStep = random.Next(0, 7);
-            Console.WriteLine(ladderStep);
-            return ladderStep;
-        }
-        public static int snackAttack()
-        {
-            Random random = new Random();
-            int snackBite = random.Next(0, 7);
-            return snackBite;
+            return random.Next(1, 4);
         }
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Snake and Ladder Game");
-           int currentPosition = 0;
-            while (currentPosition != 100)
+            Console.WriteLine("Welcome to Snake and Ladder");
+            int playerPosition = 0;
+            int winPosition = 100;
+            //repeat till win position i.e. till 100
+
+            while (playerPosition != 100)
             {
-                int numberDice = rollDiceNumber();
-                Random random = new Random();
-                int option = random.Next(1, 3);
-                // Use Switch case for option
+                int playerDice = rollDice();
+                int option = checkOption();
+
                 switch (option)
                 {
                     case 1:
-                        Console.WriteLine("Got ladder");
-                        currentPosition = currentPosition + playLadder();
+                        Console.WriteLine("Players not play");
                         break;
                     case 2:
-                        Console.WriteLine("Snake attack");
-                        currentPosition = currentPosition - snackAttack();
+                        Console.WriteLine("Player got the Ladder");
+                        playerPosition += playerDice;
+                        //ensure win position 100
+                        if (playerPosition > winPosition)
+                        {
+                            playerPosition -= playerDice;
+                        }
                         break;
-                   
+                    case 3:
+                        Console.WriteLine("Player got the Snake");
+                        //In case player position moves below 0, then player starts from zero position  
+                        if ((playerPosition - playerDice) < 0)
+                        {
+                            playerPosition = 0;
+                        }
+                        else
+                        {
+                            playerPosition -= playerDice;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Something Went Wrong");
+                        break;
                 }
+            }
+            if (playerPosition == winPosition)
+            {
+                Console.WriteLine("Player got {0} position and is the winner", playerPosition);
             }
         }
     }
 }
+
